@@ -1,0 +1,28 @@
+{
+  "name": "media-scanner",
+  "version": "1.0.0",
+  "private": true,
+  "description": "French media scanner for identifying administrative absurdities",
+  "scripts": {
+    "dev": "pnpm run --parallel dev",
+    "dev:backend": "pnpm --filter backend dev",
+    "dev:frontend": "pnpm --filter frontend dev",
+    "build": "pnpm run --parallel build",
+    "test": "pnpm run --parallel test",
+    "lint": "pnpm run --parallel lint",
+    "db:migrate": "pnpm --filter backend db:migrate",
+    "db:seed": "pnpm --filter backend db:seed"
+  },
+  "keywords": [
+    "media-scanner",
+    "french-news",
+    "ai",
+    "claude"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}
