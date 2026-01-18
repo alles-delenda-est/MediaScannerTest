@@ -52,8 +52,12 @@ COPY --from=builder /app/packages/backend/dist ./packages/backend/dist
 # Copy migrations and seeds (needed at runtime)
 COPY --from=builder /app/packages/backend/src/db ./packages/backend/src/db
 
+# Copy entrypoint script
+COPY packages/backend/docker-entrypoint.sh ./docker-entrypoint.sh
+RUN chmod +x ./docker-entrypoint.sh
+
 WORKDIR /app/packages/backend
 
 EXPOSE 3001
 
-CMD ["node", "dist/index.js"]
+ENTRYPOINT ["../docker-entrypoint.sh"]
