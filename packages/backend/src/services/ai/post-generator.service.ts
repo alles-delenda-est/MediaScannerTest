@@ -77,7 +77,7 @@ class PostGeneratorService {
           },
         ],
         {
-          model: 'claude-3-5-sonnet-20241022', // Better quality for creative generation
+          model: 'claude-3-haiku-20240307', // Better quality for creative generation
           maxTokens: 1000,
           temperature: 0.8, // Higher temperature for creativity
           systemPrompt: POST_GENERATION_SYSTEM_PROMPT,
@@ -145,7 +145,7 @@ ${instructions}`;
     const result = await claudeService.chatJson<RawPostGenerationResult>(
       [{ role: 'user', content: customPrompt }],
       {
-        model: 'claude-3-5-sonnet-20241022',
+        model: 'claude-3-haiku-20240307',
         maxTokens: 1000,
         temperature: 0.8,
         systemPrompt: POST_GENERATION_SYSTEM_PROMPT,
@@ -186,7 +186,7 @@ ${instructions}`;
           },
         ],
         {
-          model: 'claude-3-5-sonnet-20241022',
+          model: 'claude-3-haiku-20240307',
           maxTokens: 1500,
           temperature: 0.6,
           systemPrompt: DAILY_SUMMARY_SYSTEM_PROMPT,

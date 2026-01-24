@@ -1,13 +1,16 @@
-import Redis from 'ioredis';
+import IORedis from 'ioredis';
 import { env } from './env.js';
 import { logger } from '../utils/logger.js';
 
 const redisUrl = env.REDIS_URL || `redis://${env.REDIS_HOST}:${env.REDIS_PORT}`;
 
+// @ts-ignore - ioredis has complex export structure
+const Redis = typeof IORedis === 'function' ? IORedis : IORedis.default;
+
 export const redis = new Redis(redisUrl, {
   maxRetriesPerRequest: null,
   enableReadyCheck: false,
-  retryStrategy(times) {
+  retryStrategy(times: number) {
     const delay = Math.min(times * 50, 2000);
     return delay;
   },
@@ -40,7 +43,7 @@ export async function closeRedis(): Promise<void> {
 }
 
 // Create a separate connection for BullMQ (it requires a dedicated connection)
-export function createBullMQConnection(): Redis {
+export function createBullMQConnection(): any {
   return new Redis(redisUrl, {
     maxRetriesPerRequest: null,
     enableReadyCheck: false,

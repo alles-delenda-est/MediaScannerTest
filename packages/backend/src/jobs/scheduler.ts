@@ -12,11 +12,11 @@ const scheduledTasks: cron.ScheduledTask[] = [];
 export function initializeScheduler() {
   logger.info('Initializing scheduler...');
 
-  // Main overnight scan - runs at 4:00 AM Paris time
-  const fullScanTask = cron.schedule(
-    '0 4 * * *',
+  // Scans at 6:00 and 18:00 Paris time
+  const scanTask = cron.schedule(
+    '0 6,18 * * *',
     async () => {
-      logger.info('Triggering scheduled full scan');
+      logger.info('Triggering scheduled scan');
       try {
         await addScanJob({
           type: 'full',
@@ -25,36 +25,14 @@ export function initializeScheduler() {
       } catch (error) {
         logger.error({
           error: error instanceof Error ? error.message : 'Unknown error',
-        }, 'Failed to trigger full scan');
+        }, 'Failed to trigger scan');
       }
     },
     {
       timezone: 'Europe/Paris',
     }
   );
-  scheduledTasks.push(fullScanTask);
-
-  // Incremental scans every 2 hours during the day (8 AM - 10 PM Paris)
-  const incrementalScanTask = cron.schedule(
-    '0 8,10,12,14,16,18,20,22 * * *',
-    async () => {
-      logger.info('Triggering scheduled incremental scan');
-      try {
-        await addScanJob({
-          type: 'incremental',
-          triggeredBy: 'scheduler',
-        });
-      } catch (error) {
-        logger.error({
-          error: error instanceof Error ? error.message : 'Unknown error',
-        }, 'Failed to trigger incremental scan');
-      }
-    },
-    {
-      timezone: 'Europe/Paris',
-    }
-  );
-  scheduledTasks.push(incrementalScanTask);
+  scheduledTasks.push(scanTask);
 
   // Daily summary generation at 6:00 AM Paris (after main scan completes)
   const dailySummaryTask = cron.schedule(
@@ -100,8 +78,7 @@ export function initializeScheduler() {
 
   logger.info({
     tasks: [
-      'Full scan: 4:00 AM daily',
-      'Incremental scan: every 2 hours (8 AM - 10 PM)',
+      'Full scan: 6:00 AM and 6:00 PM daily',
       'Daily summary: 6:00 AM daily',
       'Cleanup: Sunday 3:00 AM weekly',
     ],

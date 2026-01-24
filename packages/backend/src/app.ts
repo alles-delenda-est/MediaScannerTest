@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Express } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
@@ -18,7 +18,7 @@ import { router as scansRoutes } from './routes/scans.routes.js';
 import { router as dashboardRoutes } from './routes/dashboard.routes.js';
 import { router as topicsRoutes } from './routes/topics.routes.js';
 
-export const app = express();
+export const app: Express = express(); // Explicitly add ': Express'
 
 // Security middleware
 app.use(helmet());

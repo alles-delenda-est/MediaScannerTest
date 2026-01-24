@@ -2,7 +2,27 @@
   "permissions": {
     "allow": [
       "WebSearch",
-      "Bash(pnpm db:migrate:*)"
+      "Bash(pnpm db:migrate:*)",
+      "Bash(git pull:*)",
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(chmod:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push)",
+      "Bash(git restore:*)",
+      "Bash(sudo chown:*)",
+      "Bash(git fetch:*)",
+      "Bash(curl:*)",
+      "Bash(docker:*)",
+      "Bash(docker compose:*)",
+      "Bash(dig:*)",
+      "Bash(openssl rand:*)",
+      "Bash(host:*)",
+      "Bash(nslookup:*)",
+      "Bash(sudo lsof:*)",
+      "Bash(netstat:*)",
+      "Bash(sudo systemctl stop:*)"
     ]
   }
 }

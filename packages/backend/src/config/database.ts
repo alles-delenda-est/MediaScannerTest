@@ -1,4 +1,4 @@
-import pg from 'pg';
+import pg, { QueryResultRow } from 'pg';
 import { env } from './env.js';
 import { logger } from '../utils/logger.js';
 
@@ -19,7 +19,7 @@ pool.on('connect', () => {
   logger.debug('New database client connected');
 });
 
-export async function query<T = unknown>(
+export async function query<T extends QueryResultRow = QueryResultRow>(
   text: string,
   params?: unknown[]
 ): Promise<pg.QueryResult<T>> {

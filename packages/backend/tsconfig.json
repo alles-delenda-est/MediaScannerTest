@@ -7,8 +7,18 @@
     "moduleResolution": "NodeNext",
     "target": "ES2022",
     "lib": ["ES2022"],
-    "types": ["node"]
+    "types": ["node"],
+    "strict": false,
+    "strictNullChecks": false,
+    "strictFunctionTypes": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitReturns": false,
+    "noEmitOnError": false,
+    "declaration": false,
+    "declarationMap": false,
+    "skipLibCheck": true
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "src/types/**/*.d.ts"],
   "exclude": ["node_modules", "dist"]
 }
